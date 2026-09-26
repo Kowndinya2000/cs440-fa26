@@ -4,7 +4,7 @@ Course website for Rutgers University's undergraduate Introduction to Artificial
 
 Published at https://kowndinya2000.github.io/cs440-fa26/.
 
-`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Course slides, notes, and recordings are accessed through Canvas.
+`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Slides for lectures 1–6 are hosted as public PDFs in `materials/`. The schedule links directly to the five available Zoom recordings and includes their playback passcodes; no Rutgers login is required. Lecture 3 was not recorded. The supplementary notes for lectures 3, 4, and 6 still link to Canvas until source PDFs are available.
 
 ## Visualizations
 
@@ -14,3 +14,7 @@ Published at https://kowndinya2000.github.io/cs440-fa26/.
 - [Minimax tic-tac-toe](https://kowndinya2000.github.io/minimax-tictactoe/): a separately maintained companion demo.
 
 This is a static website with no build step. Serve the repository root to preview it. The existing lecture URLs remain available. DM Sans is distributed under the included SIL Open Font License.
+
+## Updating course materials
+
+Export each lecture deck to PDF, place it in `materials/lecture-NN-slides.pdf`, and link it from the schedule in `index.html`. The current PDFs were exported from the instructor’s Fall 2026 Google Slides decks on September 26, 2026. Keep the course-material attribution in the footer.

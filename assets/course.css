@@ -5,3 +5,5 @@
 @media(max-width:600px){body{font-size:17px}.wrapper{width:calc(100% - 40px)}.site-nav{font-size:14px;gap:12px;flex-wrap:wrap}.site-nav div{gap:20px}.hero{padding-top:30px}h1{font-size:34px}h2{font-size:27px}.course-nav{gap:8px 19px;font-size:15px}.meeting-grid,.topic-grid,.demo-grid,.grading-grid{grid-template-columns:1fr;gap:24px}.meeting-grid>div:last-child{grid-column:auto}.course-section{padding:26px 0}.lead{font-size:19px}.weights{gap:24px}.demo{padding-left:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{body{font-size:11pt}.wrapper{width:100%}.site-nav,.course-nav,.skip-link{display:none}.hero{padding-top:0}.table-scroll{overflow:visible}.schedule,.staff-table{min-width:0}.course-section{break-inside:avoid}a{color:inherit}}
+
+.schedule code{font-size:.95em;white-space:nowrap;user-select:all}
