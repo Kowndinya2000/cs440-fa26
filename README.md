@@ -1,12 +1,16 @@
-# CS 440 · Fall 2026 · Lecture pages
+# CS440 · Fall 2026
 
-Interactive companion pages for CS 440 (Introduction to Artificial Intelligence), served with GitHub Pages.
+Course website for Rutgers University's undergraduate Introduction to Artificial Intelligence, taught by Kowndinya Boyalakuntla.
 
-Site: https://kowndinya2000.github.io/cs440-fa26/
+Published at https://kowndinya2000.github.io/cs440-fa26/.
 
-## Lecture 2 · Uninformed search
+`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Course slides, notes, and recordings are accessed through Canvas.
 
-- [Wolf, Goat, Cabbage](https://kowndinya2000.github.io/cs440-fa26/lecture2/wolf-goat-cabbage.html) — a worked problem formulation and its full state space.
-- [Search](https://kowndinya2000.github.io/cs440-fa26/lecture2/search.html) — BFS, DFS, depth-limited, iterative deepening, uniform-cost and bidirectional search, stepped through on MiniGrid environments.
+## Visualizations
 
-The pages are plain static HTML with no build step. Fonts load from Google Fonts; everything else is inlined.
+- [Wolf, Goat, Cabbage](lecture2/wolf-goat-cabbage.html): problem formulation and state-space exploration.
+- [Search algorithms](lecture2/search.html): six uninformed search algorithms on MiniGrid examples.
+- [Alpha–beta pruning](lecture5/alpha-beta.html): step through minimax and pruning.
+- [Minimax tic-tac-toe](https://kowndinya2000.github.io/minimax-tictactoe/): a separately maintained companion demo.
+
+This is a static website with no build step. Serve the repository root to preview it. The existing lecture URLs remain available. DM Sans is distributed under the included SIL Open Font License.

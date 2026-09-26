@@ -2,94 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CS 440 Lecture Pages</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
-<style>
-  :root{
-    color-scheme:light dark;
-    --ground:#F1F4F8; --surface:#FFFFFF; --sunk:#E7ECF3;
-    --ink:#10151C; --muted:#5A6675; --faint:#8592A3;
-    --line:#D5DDE7; --line-strong:#B9C4D2;
-    --accent:#2F5FE0; --accent-soft:#E5EBFB;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ground:#0D1219; --surface:#151C25; --sunk:#1B242F;
-      --ink:#E7ECF3; --muted:#98A5B5; --faint:#74828F;
-      --line:#26313D; --line-strong:#36434F;
-      --accent:#7FA2FF; --accent-soft:#1B2740;
-    }
-  }
-  *{box-sizing:border-box}
-  body{margin:0; background:var(--ground); color:var(--ink);
-    font-family:"IBM Plex Serif",Georgia,serif; font-size:16.5px; line-height:1.64;
-    -webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:"IBM Plex Sans",system-ui,sans-serif; line-height:1.25}
-  a{color:var(--accent)}
-  .bleed{max-width:1080px; margin:0 auto; padding:0 24px}
-  header.mast{background:var(--surface); border-bottom:1px solid var(--line); padding:52px 0 30px}
-  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--accent); font-weight:500}
-  h1{font-size:clamp(30px,5vw,44px); font-weight:600; letter-spacing:-.021em; margin:12px 0 10px; line-height:1.08}
-  .standfirst{font-size:17.5px; color:var(--muted); margin:0; max-width:62ch}
-  section{padding:44px 0}
-  h2{font-size:14px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin:0 0 8px}
-  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:18px 0}
-  a.card{display:block; background:var(--surface); border:1px solid var(--line); border-radius:7px;
-    padding:18px 19px 16px; border-top:3px solid var(--accent); color:inherit; text-decoration:none;
-    transition:border-color .15s}
-  a.card:hover{border-color:var(--accent)}
-  a.card:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  .card .tag{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
-    letter-spacing:.1em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:6px}
-  .card h3{margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-.012em}
-  .card p{margin:0; font-size:15px; color:var(--muted)}
-  .card .go{display:block; margin-top:12px; font-family:"IBM Plex Sans",sans-serif; font-size:13px;
-    font-weight:600; color:var(--accent)}
-  footer{border-top:1px solid var(--line); background:var(--surface); padding:28px 0 44px;
-    font-size:13px; color:var(--muted); font-family:"IBM Plex Sans",sans-serif}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CS440: Introduction to Artificial Intelligence · Fall 2026 · Rutgers</title>
+<meta name="description" content="Rutgers CS440, Fall 2026. Undergraduate Introduction to Artificial Intelligence taught by Kowndinya Boyalakuntla. Syllabus, schedule, and interactive visualizations.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://kowndinya2000.github.io/cs440-fa26/">
+<link rel="stylesheet" href="assets/course.css">
 </head>
 <body>
-<header class="mast"><div class="bleed">
-  <span class="eyebrow">CS 440 &middot; Introduction to Artificial Intelligence &middot; Fall 2026</span>
-  <h1>Lecture pages</h1>
-  <p class="standfirst">Interactive companions to the lectures. Each page is self-contained: read it top to bottom, press the buttons, and answer the questions before revealing them.</p>
-</div></header>
-
-<section><div class="bleed">
-  <h2>Lecture 2 &middot; Uninformed search</h2>
-  <div class="cards">
-    <a class="card" href="lecture2/wolf-goat-cabbage.html">
-      <span class="tag">Part 1 &middot; A worked formulation</span>
-      <h3>Wolf, Goat, Cabbage</h3>
-      <p>Turning a river-crossing riddle into states, actions and a goal test, and then drawing the whole state space to see what a search is actually searching.</p>
-      <span class="go">Open &rarr;</span>
-    </a>
-    <a class="card" href="lecture2/search.html">
-      <span class="tag">Part 2 &middot; The algorithms</span>
-      <h3>Search</h3>
-      <p>One loop, six fringes. Breadth-first, depth-first, depth-limited, iterative deepening, uniform-cost and bidirectional search, stepped through on eight MiniGrid environments with every number measured.</p>
-      <span class="go">Open &rarr;</span>
-    </a>
-  </div>
-</div></section>
-
-<section><div class="bleed">
-  <h2>Lecture 5 &middot; Adversarial search</h2>
-  <div class="cards">
-    <a class="card" href="lecture5/alpha-beta.html">
-      <span class="tag">Minimax &middot; Alpha&ndash;beta pruning</span>
-      <h3>Alpha&ndash;Beta Pruning</h3>
-      <p>Why half a million positions can be decided by looking at a fraction of them. Build the tic-tac-toe game tree, then prune it one node at a time, watching what each cutoff actually proves &mdash; and what it deliberately leaves unknown.</p>
-      <span class="go">Open &rarr;</span>
-    </a>
-  </div>
-</div></section>
-
-<footer><div class="bleed">CS 440 &middot; Fall 2026. More lectures will appear here as the term goes on.</div></footer>
+<a class="skip-link" href="#main">Skip to course content</a>
+<div class="wrapper">
+<nav class="site-nav" aria-label="Course resources"><a href="https://kowndinya2000.github.io/">Kowndinya Boyalakuntla</a><div><a href="https://rutgers.instructure.com/courses/405079">Canvas ↗</a><a href="https://piazza.com/rutgers/fall2026/cs440">Piazza ↗</a></div></nav>
+<header class="hero">
+<p class="eyebrow">Rutgers University · Department of Computer Science · Fall 2026</p>
+<h1><span>CS440</span> · Introduction to Artificial Intelligence</h1>
+<p class="subtitle">Undergraduate course · Instructor: <a href="https://kowndinya2000.github.io/">Kowndinya Boyalakuntla</a></p>
+<nav class="course-nav" aria-label="On this page"><a href="#about">Overview</a><a href="#meetings">Meetings</a><a href="#schedule">Schedule &amp; slides</a><a href="#demos">Visualizations</a><a href="#staff">Staff &amp; help</a><a href="#grading">Grading</a><a href="#textbook">Textbook</a></nav>
+</header>
+<main id="main">
+<section class="course-section" id="about" aria-labelledby="about-title">
+<h2 id="about-title">About the course</h2>
+<p class="lead">Learn to recognize which AI method fits a computational problem, and gain experience implementing those methods on representative problems.</p>
+<p class="muted">Designed for computer science undergraduate students with no prior exposure to artificial intelligence. Students from related fields with an interest in AI methods and their applications are also welcome.</p>
+<div class="topic-grid">
+<div><h3>Deterministic reasoning</h3><ul><li>Heuristic and local search</li><li>Adversarial search</li><li>Constraint satisfaction problems</li></ul></div>
+<div><h3>Probabilistic models</h3><ul><li>Bayesian networks</li><li>Hidden Markov models</li><li>Kalman and particle filters</li><li>Fully and partially observable Markov decision processes</li></ul></div>
+<div><h3>Machine learning</h3><ul><li>Linear models for regression and classification</li><li>Neural networks and kernel methods</li><li>Reinforcement learning</li><li>Perception</li></ul></div>
+</div>
+</section>
+<section class="course-section" id="meetings" aria-labelledby="meetings-title">
+<h2 id="meetings-title">Meeting times &amp; locations</h2>
+<div class="meeting-grid">
+<div><h3>Lectures</h3><p class="time">Tuesday &amp; Friday<br>12:10–1:30 PM</p><p>SEC 118 · Busch Campus</p><p class="muted">Science and Engineering Resource Center<br><a href="https://maps.apple.com/?q=Science%20and%20Engineering%20Resource%20Center%20118%20Frelinghuysen%20Road%20Piscataway%20NJ">118 Frelinghuysen Road, Piscataway ↗</a></p></div>
+<div><h3>Friday recitations</h3><table class="recitations"><thead><tr><th scope="col">Section</th><th scope="col">Time</th><th scope="col">Room</th></tr></thead><tbody><tr><td>03</td><td>5:55–6:50 PM</td><td>SEC 205</td></tr><tr><td>04</td><td>2:15–3:10 PM</td><td>SEC 202</td></tr><tr><td>08</td><td>2:15–3:10 PM</td><td>SEC 208</td></tr></tbody></table><p class="muted">Science and Engineering Resource Center</p></div>
+<div><h3>Office hours</h3><p><strong>Instructor:</strong> Tuesday, 3:00–4:00 PM<br>One Spring Street, 3rd floor, New Brunswick; also available by Zoom.</p><p><strong>Guoning Zhang:</strong> Thursday, 9:30–10:30 AM<br><strong>Doga Diren:</strong> Wednesday, 9:00–10:00 AM</p><p><a href="https://rutgers.instructure.com/courses/405079">Office-hour Zoom links in Canvas ↗</a></p></div>
+</div>
+</section>
+<section class="course-section" id="schedule" aria-labelledby="schedule-title">
+<h2 id="schedule-title">Schedule &amp; slides</h2>
+<p class="notice">Tentative and subject to change. Slides, notes, and recordings are available through Canvas and require course access. Public interactive companions are linked alongside their lectures.</p>
+<div class="table-scroll" role="region" aria-label="Lecture schedule, scroll horizontally on smaller screens" tabindex="0"><table class="schedule"><thead><tr><th scope="col">#</th><th scope="col">Topic</th><th scope="col">Course materials</th><th scope="col">Interactive companions</th></tr></thead><tbody>
+<tr><td>01</td><th scope="row">Introduction and Overview</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60290222?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079">Recording in Canvas</a></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>02</td><th scope="row">Uninformed Search</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60372887?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079">Recording in Canvas</a></td><td class="links"><a href="lecture2/wolf-goat-cabbage.html">Problem formulation</a> <a href="lecture2/search.html">Search algorithms</a></td></tr>
+<tr><td>03</td><th scope="row">Heuristic Search</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60510870?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079/files/60511370?wrap=1">Notes</a><small>Recording unavailable</small></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>04</td><th scope="row">Local Search</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60620513?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079/files/60620593?wrap=1">Notes</a> <a href="https://rutgers.instructure.com/courses/405079">Recording in Canvas</a></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>05</td><th scope="row">Adversarial Search</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60680398?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079">Recording in Canvas</a></td><td class="links"><a href="lecture5/alpha-beta.html">Alpha–beta pruning</a> <a href="https://kowndinya2000.github.io/minimax-tictactoe/">Minimax tic-tac-toe</a></td></tr>
+<tr><td>06</td><th scope="row">Probabilistic Reasoning</th><td class="links"><a href="https://rutgers.instructure.com/courses/405079/files/60815361?wrap=1">Slides</a> <a href="https://rutgers.instructure.com/courses/405079/files/60868778?wrap=1">Notes</a> <a href="https://rutgers.instructure.com/courses/405079">Recording in Canvas</a></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>07</td><th scope="row">Bayesian Models</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>08</td><th scope="row">Introduction to Modern Deep Learning I</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>09</td><th scope="row">Introduction to Modern Deep Learning II</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr class="exam"><td colspan="4">Midterm exam · Date to be announced</td></tr>
+<tr><td>10</td><th scope="row">Temporal Models</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>11</td><th scope="row">Reinforcement Learning</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>12</td><th scope="row">Advanced Topics in Neural Networks I</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr><td>13</td><th scope="row">Advanced Topics in Neural Networks II</th><td class="links"><span class="muted">Posted after lecture</span></td><td class="links"><span aria-label="No companion demo">—</span></td></tr>
+<tr class="exam"><td colspan="4">Final exam · Date to be announced</td></tr>
+</tbody></table></div>
+</section>
+<section class="course-section" id="demos" aria-labelledby="demos-title">
+<h2 id="demos-title">Interactive visualizations</h2>
+<p class="notice">Explore the examples, step through the algorithms, and answer the questions as you go.</p>
+<div class="demo-grid">
+<article class="demo"><p class="tag">Lecture 2 · Problem formulation</p><h3><a href="lecture2/wolf-goat-cabbage.html">Wolf, Goat, Cabbage</a></h3><p>Turn a river-crossing problem into states, actions, and a goal test, then explore its state space.</p><a class="open" href="lecture2/wolf-goat-cabbage.html">Open visualization →</a></article>
+<article class="demo"><p class="tag">Lecture 2 · Uninformed search</p><h3><a href="lecture2/search.html">Search algorithms</a></h3><p>Step through breadth-first, depth-first, depth-limited, iterative deepening, uniform-cost, and bidirectional search.</p><a class="open" href="lecture2/search.html">Open visualization →</a></article>
+<article class="demo"><p class="tag">Lecture 5 · Adversarial search</p><h3><a href="lecture5/alpha-beta.html">Minimax &amp; alpha–beta pruning</a></h3><p>Build a tic-tac-toe game tree and see what each cutoff proves as alpha–beta pruning skips unnecessary branches.</p><a class="open" href="lecture5/alpha-beta.html">Open visualization →</a></article>
+<article class="demo"><p class="tag">Lecture 5 · Play against minimax</p><h3><a href="https://kowndinya2000.github.io/minimax-tictactoe/">Minimax tic-tac-toe</a></h3><p>Play first or second against a minimax agent, then work through three questions about its decisions.</p><a class="open" href="https://kowndinya2000.github.io/minimax-tictactoe/">Play the demo →</a></article>
+</div>
+</section>
+<section class="course-section" id="staff" aria-labelledby="staff-title">
+<h2 id="staff-title">Course staff &amp; help</h2>
+<div class="table-scroll" role="region" aria-label="Course staff, scroll horizontally on smaller screens" tabindex="0"><table class="staff-table"><thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">Email</th></tr></thead><tbody>
+<tr><td>Kowndinya Boyalakuntla</td><td>Instructor</td><td><a href="mailto:kowndinya.boyalakuntla@rutgers.edu">kowndinya.boyalakuntla@rutgers.edu</a></td></tr>
+<tr><td>Doga Diren</td><td>Teaching Assistant</td><td><a href="mailto:doga.diren@rutgers.edu">doga.diren@rutgers.edu</a></td></tr>
+<tr><td>Guoning Zhang</td><td>Teaching Assistant</td><td><a href="mailto:guoning.zhang@rutgers.edu">guoning.zhang@rutgers.edu</a></td></tr>
+</tbody></table></div>
+<ul class="help-list"><li><strong>Lectures, homework, or exam material:</strong> ask on <a href="https://piazza.com/rutgers/fall2026/cs440">Piazza</a>. Post publicly when possible so classmates can benefit from the discussion. Course announcements also go out through Piazza.</li><li><strong>Regrade requests or recitation questions:</strong> email your TAs. They will bring the matter to the instructor if needed.</li><li><strong>Illness, accommodations, scheduling conflicts, or personal matters:</strong> <a href="mailto:kowndinya.boyalakuntla@rutgers.edu">email the instructor directly</a>.</li></ul>
+</section>
+<section class="course-section" id="grading" aria-labelledby="grading-title">
+<h2 id="grading-title">Grading &amp; exams</h2>
+<div class="grading-grid"><div><div class="weights"><span><strong>50%</strong>Homework</span><span><strong>25%</strong>Midterm</span><span><strong>25%</strong>Final</span></div><p>Some homework assignments involve programming. Python is the recommended language.</p><p>Both exams are closed-book.</p><p><strong>Midterm:</strong> deterministic reasoning, plus Bayesian networks and inference.<br><strong>Final:</strong> the remaining course topics.</p><p class="muted">Exam dates will be announced.</p></div><div><h3>Letter grades</h3><table><thead><tr><th scope="col">Grade</th><th scope="col">Score</th></tr></thead><tbody><tr><td>A</td><td>Above 89</td></tr><tr><td>B+</td><td>80–89</td></tr><tr><td>B</td><td>70–79</td></tr><tr><td>C+</td><td>60–69</td></tr><tr><td>C</td><td>50–59</td></tr><tr><td>D</td><td>40–49</td></tr><tr><td>F</td><td>Below 40</td></tr></tbody></table></div></div>
+</section>
+<section class="course-section" id="textbook" aria-labelledby="textbook-title"><h2 id="textbook-title">Textbook</h2><p class="book"><em>Artificial Intelligence: A Modern Approach</em></p><p>Stuart Russell and Peter Norvig · Fourth edition, 2021 · Pearson</p><p class="muted">Readings are assigned between lectures. Lecture slides follow the book’s structure closely.</p></section>
+</main>
+<footer class="footer"><p>CS440 · Rutgers University · Fall 2026</p><p>Course materials adapted from <a href="https://www.abdeslam.net/">Prof. Abdeslam Boularias</a>. <a href="https://github.com/Kowndinya2000/cs440-fa26">Course repository</a> · <a href="https://kowndinya2000.github.io/">Instructor’s website</a></p></footer>
+</div>
 </body>
 </html>
