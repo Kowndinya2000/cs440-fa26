@@ -11,7 +11,7 @@ Published at https://kowndinya2000.github.io/cs440-fa26/.
 - [Wolf, Goat, Cabbage](lecture2/wolf-goat-cabbage.html): problem formulation and state-space exploration.
 - [Search algorithms](lecture2/search.html): six uninformed search algorithms on MiniGrid examples.
 - [Alpha–beta pruning](lecture5/alpha-beta.html): step through minimax and pruning.
-- [Minimax tic-tac-toe](https://kowndinya2000.github.io/minimax-tictactoe/): a separately maintained companion demo.
+- [Minimax tic-tac-toe](lecture5/minimax-tictactoe/): play against a minimax agent and answer three questions.
 
 This is a static website with no build step. Serve the repository root to preview it. The existing lecture URLs remain available. DM Sans is distributed under the included SIL Open Font License.
 
