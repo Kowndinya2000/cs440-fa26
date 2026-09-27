@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Minimax Tic-Tac-Toe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+<style>
+  html, body { margin: 0; }
+  img { max-width: 100%; }
+  :root {
+    --ground: #EDF1F4;
+    --grid: #DEE5EB;
+    --surface: #FFFFFF;
+    --ink: #18222E;
+    --muted: #586676;
+    --line: #CBD4DD;
+    --board: #18222E;
+    --agent: #B4235A;
+    --agent-soft: #F9E6EE;
+    --you: #2757A8;
+    --you-soft: #E4ECF9;
+    --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F141A;
+      --grid: #17202A;
+      --surface: #151C25;
+      --ink: #E4EAF0;
+      --muted: #8F9CAA;
+      --line: #2B3644;
+      --board: #C3CDD8;
+      --agent: #F27BA7;
+      --agent-soft: #3A1A28;
+      --you: #8AB0F5;
+      --you-soft: #1B2842;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F141A;
+    --grid: #17202A;
+    --surface: #151C25;
+    --ink: #E4EAF0;
+    --muted: #8F9CAA;
+    --line: #2B3644;
+    --board: #C3CDD8;
+    --agent: #F27BA7;
+    --agent-soft: #3A1A28;
+    --you: #8AB0F5;
+    --you-soft: #1B2842;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background-color: var(--ground);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 40px 56px;
+    display: grid;
+    gap: 32px;
+  }
+
+  header { display: grid; gap: 6px; }
+  .eyebrow {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h1 .x { color: var(--agent); }
+  h1 .o { color: var(--you); }
+
+  .boards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+  }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+  }
+  .panel-head {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .panel h2 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+  }
+  .legend {
+    display: flex;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend b { font-weight: 500; }
+  .legend .agent b { color: var(--agent); }
+  .legend .you b { color: var(--you); }
+
+  .board {
+    position: relative;
+    width: min(100%, 300px);
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .board > svg.overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .overlay .grid-line {
+    stroke: var(--board);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+  }
+  .overlay .win {
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 420ms ease-out forwards;
+  }
+  .overlay .win.agent { stroke: var(--agent); }
+  .overlay .win.you { stroke: var(--you); }
+
+  .cell {
+    appearance: none;
+    border: 0;
+    margin: 7px;
+    padding: 0;
+    background: transparent;
+    border-radius: 10px;
+    color: inherit;
+    cursor: default;
+    display: grid;
+    place-items: center;
+    transition: background-color 120ms ease;
+  }
+  .cell.playable { cursor: pointer; }
+  .cell.playable:hover { background: var(--you-soft); }
+  .cell:focus-visible { outline: 2px solid var(--you); outline-offset: 1px; }
+  .cell svg {
+    width: 72%;
+    height: 72%;
+    fill: none;
+    stroke-width: 9;
+    stroke-linecap: round;
+    overflow: visible;
+  }
+  .cell.agent svg { stroke: var(--agent); }
+  .cell.you svg { stroke: var(--you); }
+  .cell svg .s {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 220ms ease-out forwards;
+  }
+  .cell svg .s2 { animation-delay: 140ms; }
+  .cell.win-cell.agent { background: var(--agent-soft); }
+  .cell.win-cell.you { background: var(--you-soft); }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .status {
+    margin: 0;
+    min-height: 1.5em;
+    font-weight: 600;
+    font-size: 17px;
+    text-align: center;
+  }
+  .status.agent { color: var(--agent); }
+  .status.you { color: var(--you); }
+  .searched {
+    margin: -12px 0 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .foot {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .tally {
+    margin: 0;
+    display: flex;
+    gap: 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .tally div { display: flex; gap: 6px; align-items: baseline; }
+  .tally dt { text-transform: uppercase; letter-spacing: 0.06em; }
+  .tally dd {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .tally .t-agent dd { color: var(--agent); }
+  .tally .t-you dd { color: var(--you); }
+
+  .btn {
+    appearance: none;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--surface);
+    font: 500 14px/1 var(--body);
+    padding: 10px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 100ms ease, opacity 100ms ease;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible { outline: 2px solid var(--you); outline-offset: 2px; }
+
+  .questions {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px 8px;
+    display: grid;
+    gap: 10px;
+  }
+  .questions h2 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 22px;
+  }
+  .q-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+  }
+  .q-list li {
+    display: grid;
+    grid-template-columns: 2.6em 1fr;
+    gap: 12px;
+    align-items: baseline;
+    padding-block: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .q-num {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--muted);
+  }
+  .q-list p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .q-list strong { font-weight: 600; }
+  .rule {
+    justify-self: start;
+    margin: 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--agent-soft);
+    color: var(--agent);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cell svg .s, .overlay .win { animation: none; stroke-dashoffset: 0; }
+    .cell, .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+<nav aria-label="Course navigation" style="padding:12px 24px;background:#fff;border-bottom:1px solid #d5dde7;font:16px/1.5 Arial,sans-serif"><a href="https://kowndinya2000.github.io/cs440-fa26/#demos" style="color:#185a9d;text-decoration:underline">← CS440 course home &amp; visualizations</a></nav>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">Adversarial search · Zero-sum</p>
+    <h1>Beat the <span class="x">minimax</span> agent. <span class="o">Or try.</span></h1>
+  </header>
+
+  <section class="boards" aria-label="Games">
+    <article class="panel" id="panel-first">
+      <div class="panel-head">
+        <h2>Agent moves first</h2>
+        <div class="legend"><span class="agent"><b>X</b> Agent</span><span class="you"><b>O</b> You</span></div>
+      </div>
+      <div class="board" role="grid" aria-label="Board, agent moves first"></div>
+      <p class="status" aria-live="polite"></p>
+      <p class="searched"></p>
+      <div class="foot">
+        <dl class="tally">
+          <div class="t-agent"><dt>Agent</dt><dd data-k="agent">0</dd></div>
+          <div class="t-draw"><dt>Draw</dt><dd data-k="draw">0</dd></div>
+          <div class="t-you"><dt>You</dt><dd data-k="you">0</dd></div>
+        </dl>
+        <button class="btn" type="button" id="new-first">New game</button>
+      </div>
+    </article>
+
+    <article class="panel" id="panel-second">
+      <div class="panel-head">
+        <h2>You move first</h2>
+        <div class="legend"><span class="you"><b>X</b> You</span><span class="agent"><b>O</b> Agent</span></div>
+      </div>
+      <div class="board" role="grid" aria-label="Board, you move first"></div>
+      <p class="status" aria-live="polite"></p>
+      <p class="searched"></p>
+      <div class="foot">
+        <dl class="tally">
+          <div class="t-agent"><dt>Agent</dt><dd data-k="agent">0</dd></div>
+          <div class="t-draw"><dt>Draw</dt><dd data-k="draw">0</dd></div>
+          <div class="t-you"><dt>You</dt><dd data-k="you">0</dd></div>
+        </dl>
+        <button class="btn" type="button" id="new-second">New game</button>
+      </div>
+    </article>
+  </section>
+
+  <section class="questions" aria-labelledby="q-title">
+    <p class="rule">Use as few words as possible.</p>
+    <h2 id="q-title">Questions</h2>
+    <ol class="q-list">
+      <li>
+        <span class="q-num" aria-hidden="true">Q1</span>
+        <p>Play as many times as you want. The agent <strong>never loses</strong>. Why?</p>
+      </li>
+      <li>
+        <span class="q-num" aria-hidden="true">Q2</span>
+        <p>Can we call the AI player <strong>intelligent</strong>? Recall our first lecture on definitions of intelligence.</p>
+      </li>
+      <li>
+        <span class="q-num" aria-hidden="true">Q3</span>
+        <p>The agent picks <strong>k</strong> of the 9 starting positions more often than the other 9&#8239;&minus;&#8239;k, to win more often and at worst draw. Any guesses on why those <strong>k</strong> initial positions are more promising than others?</p>
+      </li>
+    </ol>
+  </section>
+</main>
+
+<script>
+(() => {
+  const LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  const NS = "http://www.w3.org/2000/svg";
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fmt = new Intl.NumberFormat("en-US");
+
+  function winner(b) {
+    for (const [a, c, d] of LINES) {
+      if (b[a] && b[a] === b[c] && b[a] === b[d]) return { mark: b[a], line: [a, c, d] };
+    }
+    return null;
+  }
+
+  let nodes = 0;
+  function minimax(b, turn, me, depth) {
+    nodes++;
+    const w = winner(b);
+    if (w) return w.mark === me ? 10 - depth : depth - 10;
+    if (b.every(Boolean)) return 0;
+    const next = turn === "X" ? "O" : "X";
+    let best = turn === me ? -Infinity : Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (b[i]) continue;
+      b[i] = turn;
+      const s = minimax(b, next, me, depth + 1);
+      b[i] = null;
+      best = turn === me ? Math.max(best, s) : Math.min(best, s);
+    }
+    return best;
+  }
+  function bestMove(board, me) {
+    const b = board.slice();
+    const opp = me === "X" ? "O" : "X";
+    nodes = 0;
+    const options = [];
+    for (let i = 0; i < 9; i++) {
+      if (b[i]) continue;
+      b[i] = me;
+      nodes++;
+      let value, traps = 0;
+      if (winner(b)) value = 9;
+      else if (b.every(Boolean)) value = 0;
+      else {
+        value = Infinity;
+        for (let j = 0; j < 9; j++) {
+          if (b[j]) continue;
+          b[j] = opp;
+          const v = minimax(b, me, me, 2);
+          b[j] = null;
+          value = Math.min(value, v);
+          if (v > 0) traps++;
+        }
+      }
+      b[i] = null;
+      options.push({ i, value, traps });
+    }
+    const bestValue = Math.max(...options.map((o) => o.value));
+    const safe = options.filter((o) => o.value === bestValue);
+    const bestTraps = Math.max(...safe.map((o) => o.traps));
+    const picks = safe.filter((o) => o.traps === bestTraps);
+    const move = picks[Math.floor(Math.random() * picks.length)].i;
+    return { move, nodes };
+  }
+
+  function markSVG(mark) {
+    return mark === "X"
+      ? '<svg viewBox="0 0 100 100" aria-hidden="true"><path class="s" pathLength="1" d="M24 24 L76 76"/><path class="s s2" pathLength="1" d="M76 24 L24 76"/></svg>'
+      : '<svg viewBox="0 0 100 100" aria-hidden="true"><circle class="s" pathLength="1" cx="50" cy="50" r="27" transform="rotate(-90 50 50)"/></svg>';
+  }
+
+  const CONFIG = [
+    { key: "first", agent: "X", you: "O" },
+    { key: "second", agent: "O", you: "X" },
+  ];
+
+  function freshState(prev) {
+    return {
+      board: Array(9).fill(null),
+      result: null,
+      line: null,
+      searched: null,
+      tally: prev ? prev.tally : { agent: 0, draw: 0, you: 0 },
+    };
+  }
+
+  function makePanel(cfg, saved) {
+    const root = document.getElementById("panel-" + cfg.key);
+    const boardEl = root.querySelector(".board");
+    const statusEl = root.querySelector(".status");
+    const searchedEl = root.querySelector(".searched");
+    const tallyEls = root.querySelectorAll(".tally dd");
+    const newBtn = root.querySelector(".btn");
+
+    const overlay = document.createElementNS(NS, "svg");
+    overlay.setAttribute("class", "overlay");
+    overlay.setAttribute("viewBox", "0 0 300 300");
+    overlay.setAttribute("aria-hidden", "true");
+    for (const [x1, y1, x2, y2] of [[100,6,100,294],[200,6,200,294],[6,100,294,100],[6,200,294,200]]) {
+      const l = document.createElementNS(NS, "line");
+      Object.entries({ x1, y1, x2, y2, class: "grid-line" }).forEach(([k, v]) => l.setAttribute(k, v));
+      overlay.appendChild(l);
+    }
+    const cells = [];
+    for (let i = 0; i < 9; i++) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cell";
+      btn.id = `${cfg.key}-cell-${i}`;
+      btn.dataset.mark = "";
+      btn.addEventListener("click", () => play(i));
+      boardEl.appendChild(btn);
+      cells.push(btn);
+    }
+    boardEl.appendChild(overlay);
+
+    let state = saved || freshState();
+    let busy = false;
+    let timer = null;
+
+    const whoOf = (mark) => (mark === cfg.agent ? "agent" : "you");
+    const turnMark = () => (state.board.filter(Boolean).length % 2 === 0 ? "X" : "O");
+    const yourTurn = () => !state.result && !busy && turnMark() === cfg.you;
+
+    function finishIfOver() {
+      const w = winner(state.board);
+      if (w) {
+        state.result = whoOf(w.mark);
+        state.line = w.line;
+      } else if (state.board.every(Boolean)) {
+        state.result = "draw";
+      }
+      if (state.result) state.tally[state.result]++;
+      return Boolean(state.result);
+    }
+
+    function play(i) {
+      if (!yourTurn() || state.board[i]) return;
+      state.board[i] = cfg.you;
+      if (!finishIfOver()) agentTurn();
+      render();
+    }
+
+    function agentTurn() {
+      busy = true;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const { move, nodes: n } = bestMove(state.board, cfg.agent);
+        state.board[move] = cfg.agent;
+        state.searched = n;
+        busy = false;
+        finishIfOver();
+        render();
+      }, reduced ? 60 : 380);
+    }
+
+    function newGame() {
+      clearTimeout(timer);
+      busy = false;
+      state = freshState(state);
+      if (cfg.agent === "X") agentTurn();
+      render();
+    }
+    newBtn.addEventListener("click", newGame);
+
+    function render() {
+      state.board.forEach((mark, i) => {
+        const c = cells[i];
+        const m = mark || "";
+        if (c.dataset.mark !== m) {
+          c.dataset.mark = m;
+          c.innerHTML = m ? markSVG(m) : "";
+        }
+        const who = m ? whoOf(m) : "";
+        c.classList.toggle("agent", who === "agent");
+        c.classList.toggle("you", who === "you");
+        c.classList.toggle("win-cell", Boolean(state.line && state.line.includes(i)));
+        const playable = !m && yourTurn();
+        c.classList.toggle("playable", playable);
+        c.disabled = !playable;
+        const row = Math.floor(i / 3) + 1, col = (i % 3) + 1;
+        c.setAttribute("aria-label", `Row ${row}, column ${col}: ${m ? (who === "agent" ? "Agent " : "You ") + m : "empty"}`);
+      });
+
+      const oldWin = overlay.querySelector(".win");
+      if (state.line && !oldWin) {
+        const [a, , z] = state.line;
+        const ctr = (k) => [(k % 3) * 100 + 50, Math.floor(k / 3) * 100 + 50];
+        const [ax, ay] = ctr(a), [zx, zy] = ctr(z);
+        const dx = (zx - ax) * 0.2, dy = (zy - ay) * 0.2;
+        const l = document.createElementNS(NS, "line");
+        Object.entries({
+          x1: ax - dx, y1: ay - dy, x2: zx + dx, y2: zy + dy,
+          pathLength: 1, class: "win " + state.result,
+        }).forEach(([k, v]) => l.setAttribute(k, v));
+        overlay.appendChild(l);
+      } else if (!state.line && oldWin) {
+        oldWin.remove();
+      }
+
+      let text = "", tone = "";
+      if (state.result === "agent") { text = "Agent wins."; tone = "agent"; }
+      else if (state.result === "you") { text = "You win!"; tone = "you"; }
+      else if (state.result === "draw") { text = "Draw."; }
+      else if (busy) { text = "Agent is searching…"; tone = "agent"; }
+      else { text = "Your move."; tone = "you"; }
+      statusEl.textContent = text;
+      statusEl.className = "status " + tone;
+
+      searchedEl.textContent = state.searched == null
+        ? " "
+        : `Agent's last move: ${fmt.format(state.searched)} positions searched`;
+
+      tallyEls.forEach((dd) => { dd.textContent = state.tally[dd.dataset.k]; });
+    }
+
+    if (!state.result && turnMark() === cfg.agent) agentTurn();
+    render();
+
+    return { snapshot: () => JSON.parse(JSON.stringify(state)) };
+  }
+
+  function start(data) {
+    const saved = (data && data.panels) || {};
+    CONFIG.forEach((cfg) => makePanel(cfg, saved[cfg.key]));
+  }
+
+  start({});
+})();
+</script>
+</body>
+</html>
