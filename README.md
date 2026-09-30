@@ -4,7 +4,7 @@ Course website for Rutgers University's undergraduate Introduction to Artificial
 
 Published at https://kowndinya2000.github.io/cs440-fa26/.
 
-`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Slides for lectures 1–6 and notes for lectures 3, 4, 6, and 7 link to the corresponding files in Canvas. The schedule links directly to the six available Zoom recordings and includes their playback passcodes. Lecture 3 was not recorded.
+`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Slides for lectures 1–6 and notes for lectures 3, 4, 6, and 7 link to the corresponding files in Canvas. The schedule links directly to the six available Zoom recordings and includes their playback passcodes. Lecture 3 was not recorded. Instructor and TA office hours include direct Rutgers Zoom links, meeting IDs, and passcodes.
 
 ## Visualizations
 
