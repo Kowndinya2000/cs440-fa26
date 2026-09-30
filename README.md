@@ -4,7 +4,7 @@ Course website for Rutgers University's undergraduate Introduction to Artificial
 
 Published at https://kowndinya2000.github.io/cs440-fa26/.
 
-`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Slides for lectures 1–6 are hosted as public PDFs in `materials/`. The schedule links directly to the five available Zoom recordings and includes their playback passcodes; no Rutgers login is required. Lecture 3 was not recorded. The supplementary notes for lectures 3, 4, and 6 still link to Canvas until source PDFs are available.
+`index.html` contains the syllabus, schedule, course staff, grading, and links to the interactive lecture companions. Slides for lectures 1–6 and notes for lectures 3, 4, 6, and 7 link to the corresponding files in Canvas. The schedule links directly to the six available Zoom recordings and includes their playback passcodes. Lecture 3 was not recorded.
 
 ## Visualizations
 
@@ -17,4 +17,4 @@ This is a static website with no build step. Serve the repository root to previe
 
 ## Updating course materials
 
-Export each lecture deck to PDF, place it in `materials/lecture-NN-slides.pdf`, and link it from the schedule in `index.html`. The current PDFs were exported from the instructor’s Fall 2026 Google Slides decks on September 26, 2026. Keep the course-material attribution in the footer.
+Upload slides and notes to Canvas, then link the corresponding files from the schedule in `index.html`. Use absolute URLs beginning with `https://rutgers.instructure.com/courses/405079/files/` so the links work from the public course page. Keep the course-material attribution in the footer.
