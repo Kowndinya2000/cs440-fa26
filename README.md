@@ -12,6 +12,7 @@ Published at https://kowndinya2000.github.io/cs440-fa26/.
 - [Search algorithms](lecture2/search.html): six uninformed search algorithms on MiniGrid examples.
 - [Alpha–beta pruning](lecture5/alpha-beta.html): step through minimax and pruning.
 - [Minimax tic-tac-toe](lecture5/minimax-tictactoe/): play against a minimax agent and answer three questions.
+- [Generative deep learning](notebooks/generative_dl_ch1_3_preview.html): a PyTorch notebook following chapters 1 to 3 of Foster's *Generative Deep Learning*, with an executed preview, a Colab link and the `.ipynb` in `notebooks/`.
 
 This is a static website with no build step. Serve the repository root to preview it. The existing lecture URLs remain available. DM Sans is distributed under the included SIL Open Font License.
 

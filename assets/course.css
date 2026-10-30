@@ -7,3 +7,4 @@
 @media print{body{font-size:11pt}.wrapper{width:100%}.site-nav,.course-nav,.skip-link{display:none}.hero{padding-top:0}.table-scroll{overflow:visible}.schedule,.staff-table{min-width:0}.course-section{break-inside:avoid}a{color:inherit}}
 
 .schedule code{font-size:.95em;white-space:nowrap;user-select:all}
+.demo .open+.open{margin-left:18px}
