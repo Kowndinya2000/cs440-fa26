@@ -7796,13 +7796,14 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9994a7af">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a3278e54">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Generative-Deep-Learning,-Chapters-1-to-3">Generative Deep Learning, Chapters 1 to 3<a class="anchor-link" href="#Generative-Deep-Learning,-Chapters-1-to-3">¶</a></h1><h3 id="From-probability-models-to-variational-autoencoders">From probability models to variational autoencoders<a class="anchor-link" href="#From-probability-models-to-variational-autoencoders">¶</a></h3><hr/>
+<h1 id="Generative-Deep-Learning,-Chapters-1-to-3">Generative Deep Learning, Chapters 1 to 3<a class="anchor-link" href="#Generative-Deep-Learning,-Chapters-1-to-3">¶</a></h1><h3 id="From-probability-models-to-variational-autoencoders">From probability models to variational autoencoders<a class="anchor-link" href="#From-probability-models-to-variational-autoencoders">¶</a></h3><p><a href="https://colab.research.google.com/github/Kowndinya2000/cs440-fa26/blob/main/notebooks/generative_dl_ch1_3.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg"/></a></p>
+<hr/>
 <p>This notebook follows the first three chapters of David Foster,
 <em>Generative Deep Learning</em> (O'Reilly, first edition). The book's code is
 written in Keras (<a href="https://github.com/davidADSP/GDL_code">GDL_code</a>). Here the
@@ -7841,15 +7842,18 @@ same models are rewritten in PyTorch, with the same layer sizes.</p>
 <p><strong>Dependencies:</strong> <code>numpy</code>, <code>matplotlib</code> and <code>torch</code>. The notebook downloads
 MNIST (11 MB) and CIFAR-10 (163 MB) into a <code>data/</code> folder the first time it
 runs.</p>
-<p><strong>Run time:</strong> about 12 minutes on a 24-core desktop CPU, and longer on a
-laptop. A GPU is much faster: on Colab, choose Runtime, then Change runtime
-type. The number of training epochs is set in the first code cell. Lower it for
-a faster run with somewhat worse models.</p>
+<p><strong>Running on Colab.</strong> Open the notebook with the badge above. It asks Colab for
+a GPU runtime. If the first code cell prints that no GPU was found, choose
+Runtime, then Change runtime type, then a GPU, and run the cells again. Without
+a GPU the notebook still runs, but slowly: about 12 minutes on a 24-core desktop
+CPU, and much longer on Colab's CPU runtime. The number of training epochs is
+set in the first code cell. Lower it for a faster run with somewhat worse
+models.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a87827e7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a0bb022">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7859,7 +7863,7 @@ a faster run with somewhat worse models.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a03a721c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=81c5e73f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7894,6 +7898,8 @@ a faster run with somewhat worse models.</p>
     <span class="s2">"legend.frameon"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">"figure.dpi"</span><span class="p">:</span> <span class="mi">110</span><span class="p">,</span>
 <span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"device:"</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">device</span> <span class="o">==</span> <span class="s2">"cpu"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"No GPU found. Training will be slow. On Colab: Runtime, Change runtime type, GPU."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7907,13 +7913,14 @@ a faster run with somewhat worse models.</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>device: cpu
+No GPU found. Training will be slow. On Colab: Runtime, Change runtime type, GPU.
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f92f651">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7038d543">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7924,7 +7931,7 @@ images. Every model in the notebook is trained with the same <code>train</code> 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2e3d0de3">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5573c5dd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8023,7 +8030,7 @@ images. Every model in the notebook is trained with the same <code>train</code> 
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=98eeb16f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=51593275">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8123,7 +8130,7 @@ mean and the sample covariance.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fa4c890a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5b3f343e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8164,7 +8171,7 @@ mean and the sample covariance.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ceb2e6d3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cedc8897">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8174,8 +8181,10 @@ mean and the sample covariance.</p>
 inside the arc, where the data never go. They break Rule 1. Fitting cannot fix
 this, because no Gaussian has the shape of an arc. The choice of model family
 limits what the model can learn.</p>
-<h2 id="1.3-Naive-Bayes:-Planet-Wrodl-and-Planet-Pixel">1.3 Naive Bayes: Planet Wrodl and Planet Pixel<a class="anchor-link" href="#1.3-Naive-Bayes:-Planet-Wrodl-and-Planet-Pixel">¶</a></h2><p>The book's first full example is a story. You are the new Chief Fashion Officer
-of Planet Wrodl and must invent new outfits from 50 examples. Each outfit has
+<h2 id="1.3-Naive-Bayes:-Planet-Wrodl-and-Planet-Pixel">1.3 Naive Bayes: Planet Wrodl and Planet Pixel<a class="anchor-link" href="#1.3-Naive-Bayes:-Planet-Wrodl-and-Planet-Pixel">¶</a></h2><p>The book's first full example is a story called "Hello Wrodl!", a play on
+"Hello, World!", the first program people write in a new language. You are the
+new Chief Fashion Officer of Planet Wrodl and must invent new outfits from 50
+examples. Each outfit has
 five features: hairstyle (7 options), hair color (6), glasses (3), clothing
 type (4) and clothing color (8).</p>
 <ul>
@@ -8202,7 +8211,7 @@ only images of the digit 7, which is naive Bayes with the label given.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=378df3e7">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8aa959b2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8240,7 +8249,7 @@ only images of the digit 7, which is naive Bayes with the label given.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df3d92b7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4cb308b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8272,7 +8281,7 @@ networks, and Part 3 learns a latent space for digits.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a23338de">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=43564c5d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8301,7 +8310,7 @@ ten classes.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=19cf406a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=07b570e3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8338,7 +8347,7 @@ ten classes.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e80ae032">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ca540e7a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8354,7 +8363,7 @@ integer labels. The two set-ups compute the same loss.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=23329042">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=315b07e2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8398,70 +8407,70 @@ integer labels. The two set-ups compute the same loss.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  1/10   loss 1.8474   (8 s)
+<pre>epoch  1/10   loss 1.8474   (4 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  2/10   loss 1.6687   (11 s)
+<pre>epoch  2/10   loss 1.6687   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  3/10   loss 1.5799   (11 s)
+<pre>epoch  3/10   loss 1.5799   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  4/10   loss 1.5217   (11 s)
+<pre>epoch  4/10   loss 1.5217   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  5/10   loss 1.4809   (11 s)
+<pre>epoch  5/10   loss 1.4809   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  6/10   loss 1.4485   (11 s)
+<pre>epoch  6/10   loss 1.4485   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  7/10   loss 1.4209   (11 s)
+<pre>epoch  7/10   loss 1.4209   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  8/10   loss 1.3949   (11 s)
+<pre>epoch  8/10   loss 1.3949   (6 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  9/10   loss 1.3760   (11 s)
+<pre>epoch  9/10   loss 1.3760   (10 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch 10/10   loss 1.3509   (11 s)
+<pre>epoch 10/10   loss 1.3509   (10 s)
 MLP test accuracy: 49.1%   (book: 49.0% after 10 epochs)
 </pre>
 </div>
@@ -8469,7 +8478,7 @@ MLP test accuracy: 49.1%   (book: 49.0% after 10 epochs)
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60ac6878">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=697c5dfc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8487,7 +8496,7 @@ to horizontal edges and the second to vertical edges.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bca5041f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ddb44779">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8533,7 +8542,7 @@ to horizontal edges and the second to vertical edges.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7ac29d2e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=73274067">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8564,7 +8573,7 @@ inputs, so a unit never has a gradient of exactly zero.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=82da3382">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b81fa315">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8608,35 +8617,35 @@ inputs, so a unit never has a gradient of exactly zero.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  1/5   loss 1.3460   (17 s)
+<pre>epoch  1/5   loss 1.3460   (16 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  2/5   loss 0.9798   (17 s)
+<pre>epoch  2/5   loss 0.9798   (16 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  3/5   loss 0.8387   (17 s)
+<pre>epoch  3/5   loss 0.8387   (14 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  4/5   loss 0.7445   (17 s)
+<pre>epoch  4/5   loss 0.7445   (13 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  5/5   loss 0.6696   (17 s)
+<pre>epoch  5/5   loss 0.6696   (13 s)
 </pre>
 </div>
 </div>
@@ -8650,7 +8659,7 @@ inputs, so a unit never has a gradient of exactly zero.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=178b1b70">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cc2e4aca">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8661,7 +8670,7 @@ architecture changed. Some test predictions:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=001ea537">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=21c3157a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8691,7 +8700,7 @@ architecture changed. Some test predictions:</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b443c784">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3c741375">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8705,7 +8714,7 @@ Part 3 uses the same blocks to build a network that generates images.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=32d196c8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4d1e8127">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8770,7 +8779,7 @@ use the mean squared error, which has the same minimum as its square root.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b0f97bb1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=19f8c846">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8831,42 +8840,42 @@ use the mean squared error, which has the same minimum as its square root.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  1/5   loss 0.0526   (24 s)
+<pre>epoch  1/5   loss 0.0526   (25 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  2/5   loss 0.0446   (27 s)
+<pre>epoch  2/5   loss 0.0446   (25 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  3/5   loss 0.0423   (29 s)
+<pre>epoch  3/5   loss 0.0423   (26 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  4/5   loss 0.0411   (27 s)
+<pre>epoch  4/5   loss 0.0411   (26 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  5/5   loss 0.0404   (26 s)
+<pre>epoch  5/5   loss 0.0404   (25 s)
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df9dbd48">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=337ddaf6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8877,7 +8886,7 @@ just two numbers.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bd502b2f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=47418f67">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8905,7 +8914,7 @@ just two numbers.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d69c1ba7">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ad88202">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8918,7 +8927,7 @@ encodings cover and decode them.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c8d4d725">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6dbd9847">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8967,7 +8976,7 @@ encodings cover and decode them.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a32fa02f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=82f9435b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9025,7 +9034,7 @@ small, the KL term dominates and the reconstructions are poor.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3616f0d9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d9e62fc0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9073,42 +9082,42 @@ small, the KL term dominates and the reconstructions are poor.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  1/10   loss 54.7539   (24 s)
+<pre>epoch  1/10   loss 54.7539   (26 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  2/10   loss 49.1927   (25 s)
+<pre>epoch  2/10   loss 49.1927   (24 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  3/10   loss 47.8510   (28 s)
+<pre>epoch  3/10   loss 47.8510   (25 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  4/10   loss 46.9806   (30 s)
+<pre>epoch  4/10   loss 46.9806   (25 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  5/10   loss 46.4027   (30 s)
+<pre>epoch  5/10   loss 46.4027   (26 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  6/10   loss 46.0281   (29 s)
+<pre>epoch  6/10   loss 46.0281   (25 s)
 </pre>
 </div>
 </div>
@@ -9122,28 +9131,28 @@ small, the KL term dominates and the reconstructions are poor.</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  8/10   loss 45.4013   (27 s)
+<pre>epoch  8/10   loss 45.4013   (23 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch  9/10   loss 45.1908   (30 s)
+<pre>epoch  9/10   loss 45.1908   (25 s)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>epoch 10/10   loss 44.9826   (27 s)
+<pre>epoch 10/10   loss 44.9826   (24 s)
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2b1be08f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=71544b84">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9157,7 +9166,7 @@ follow $\mathcal{N}(0, I)$, they fill the unit square evenly.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=22b192e9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=96e037a4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9205,7 +9214,7 @@ follow $\mathcal{N}(0, I)$, they fill the unit square evenly.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6e0430d6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dc71de2a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9223,7 +9232,7 @@ normal distribution, so every cell holds about the same probability.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6cc5c428">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e82c7aee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9260,7 +9269,7 @@ normal distribution, so every cell holds about the same probability.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e85e318">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0ce077c3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9275,7 +9284,7 @@ regions of other digits, so those appear along the way.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b89585c1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3eb8f0c0">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9306,7 +9315,7 @@ regions of other digits, so those appear along the way.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd30a95c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cc6be0b8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9346,7 +9355,7 @@ several features at once, and the transition is smooth.</li>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3dc140e2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a01dfe92">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
